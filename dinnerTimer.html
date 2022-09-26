@@ -7,24 +7,20 @@
         function setClock(){
             let dateInfo = new Date();
             let dinnerTime = new Date();
+
             dinnerTime.setHours(18);
-            dinnerTime.setMinutes(20);
+            dinnerTime.setMinutes(19);
+            dinnerTime.setSeconds(59);
+            dinnerTime.setMilliseconds(0);
+
             let hour = modifyNumber(dateInfo.getHours());
             let min = modifyNumber(dateInfo.getMinutes());
             let sec = modifyNumber(dateInfo.getSeconds());
             let year = dateInfo.getFullYear();
             let month = dateInfo.getMonth()+1; //monthIndex를 반환해주기 때문에 1을 더해준다.
             let date = dateInfo.getDate();
-            let dhour=modifyNumber(dinnerTime.getHours()-hour);
-            let dmin=80-dateInfo.getMinutes();
-            if(dmin<0){
-                dmin= modifyNumber(80-dmin);
-            }else{
-                dmin=modifyNumber(dmin);
-            }
-            if(dhour<0){
-                dhour=24-dhour;
-            }
+            let dhour=modifyNumber(Math.floor((dinnerTime-dateInfo)/(1000*60*60)));
+            let dmin=modifyNumber(Math.floor((dinnerTime-dateInfo)/(1000*60)));
             let dsec=modifyNumber(60-dateInfo.getSeconds());
             let dmsec=modifyNumber(dateInfo.getMilliseconds());
             document.getElementById("time").innerHTML = hour + ":" + min  + ":" + sec;
